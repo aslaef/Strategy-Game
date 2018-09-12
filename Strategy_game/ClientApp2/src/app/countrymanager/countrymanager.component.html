@@ -1,0 +1,71 @@
+
+<style>
+  button{
+    color: black;
+    border: 1px solid brown;
+    
+    width: 160px;
+    
+  }
+
+
+</style>
+
+<div style="margin-top: 50px;margin-right: 10px;">
+  <button (click)="getCountries()">refreshCountries</button>
+  <p *ngIf="game">Round: {{ (Game$ | async).roundNumber }}</p>
+  <div class="row" style="margin-top: 20px;border-top: 3px solid black; background: yellow">
+    <div class="col col-lg-3">
+      <table class='table' *ngIf="countries">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>countryName</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let country of countries">
+            <td>{{ country.countryId }}</td>
+
+            <td>
+              <button routerLink="/details/{{country.countryId}}">
+
+                {{ country.countryName }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+<br />
+<h1>Country Name: </h1>
+<input #textbox2 />
+<button (click)="adder(textbox2.value)">Add Country</button>
+
+<!--<h1>Adding new Unit to: </h1>
+<input #textbox3 />
+<button (click)="unitAdder(textbox3.value)">Add Units to Country</button>-->
+<p *ngIf="unit">asd {{unit.unitId}} </p>
+<button (click)="addGame()">CreateGame</button>
+<button (click)="nexxtRound()">NextTurn</button>

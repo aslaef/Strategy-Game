@@ -1,0 +1,215 @@
+
+<style>
+  .platoonbg {
+    background-image: url(https://pmcvariety.files.wordpress.com/2017/01/platoon.jpg?w=1000);
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    border: 1px solid red;
+  }
+
+  .asd > td > p {
+    background: black;
+    color: yellow;
+  }
+</style>
+
+
+<button (click)="getAll(targetid)" style="width: auto">refresh</button>
+<div class="col col-lg-12" style="border: 2px solid brown; margin-top: 20px;" *ngIf="selectedC">
+  <p>Country: <b style="color: brown">{{selectedC.countryName}}</b></p>
+  <p style="color: yellow; background: black">GOLD: {{selectedC.gold}}</p>
+  <p style="color: sandybrown; background: black">POTATOES: {{selectedC.potatoes}}</p>
+  <table class='table' *ngIf="selectedC">
+    <thead>
+      <tr>
+
+        <th>tractor</th>
+        <th>combine</th>
+        <th>wall</th>
+        <th>commander</th>
+        <th>tactican</th>
+        <th>alchemy</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+
+        <td>{{ selectedC.tractor }}</td>
+        <td>{{ selectedC.combine }}</td>
+        <td>{{ selectedC.wall }}</td>
+        <td>{{ selectedC.commander }}</td>
+        <td>{{ selectedC.tactican }}</td>
+        <td>{{ selectedC.alchemy }}</td>
+
+      </tr>
+      <tr>
+
+        <td>
+          <button (click)="upgrade(1)" style="width: auto">ADD tractor</button>
+
+        </td>
+        <td><button (click)="upgrade(2)" style="width: auto">ADD combine</button></td>
+        <td><button (click)="upgrade(3)" style="width: auto">ADD wall</button></td>
+        <td><button (click)="upgrade(4)" style="width: auto">ADD commander</button></td>
+        <td><button (click)="upgrade(5)" style="width: auto">ADD tactican</button></td>
+        <td><button (click)="upgrade(6)" style="width: auto">ADD alchemist</button></td>
+
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <p style="font-size: 20px; text-decoration: underline">Units:</p>
+    <div class="row">
+      <div class="col col-lg-7">
+        <p *ngIf="errormsg" style="color: red; font-size: 40px; border: 1px solid red;">{{errormsg}}</p>
+        <table style="width: 100%">
+          <tr *ngIf="selectedA">
+            <td>Archers: </td>
+            <td>{{selectedA.counter}}</td>
+            <td><button (click)="putunit(selectedA.unitId)">buy one archer: {{selectedA.price}}$</button></td>
+            <td><button (click)="PutArcherToPlatoon()">Put one in the Platoon</button></td>
+          </tr>
+          <tr *ngIf="selectedH">
+            <td>Horsemans: </td>
+            <td>{{selectedH.counter}}</td>
+            <td><button (click)="puthorseman(selectedH.unitId)">buy one horseman: {{selectedH.price}}$</button></td>
+            <td><button (click)="PutHorsemanInPlatoon()">Put one in the Platoon</button></td>
+          </tr>
+          <tr *ngIf="selectedS">
+            <td>Footmans: </td>
+            <td>{{selectedS.counter}}</td>
+            <td><button (click)="putsoldier(selectedS.unitId)">buy one footman: {{selectedS.price}}$</button></td>
+            <td><button (click)="PutSoldierInPlatoon()">Put one in the Platoon</button></td>
+          </tr>
+        </table>
+        <table style="width: 100%">
+          <tr *ngIf="selectedF">
+            <td>Farms: </td>
+            <td>{{selectedF.counter}}</td>
+            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.unitId}}" [disabled]="disabler1" (click)="putfarm(selectedF.unitId)">buy one Farm: {{selectedF.price}}$</button></td>
+            <td style="width: 200px;">
+              <div class="progress" style="margin: auto">
+              <div class="progress-bar" role="progressbar" aria-valuenow="20"
+                   aria-valuemin="0" aria-valuemax="100" [style.width.%]="selectedF.builder/5*100">
+                <span class="sr-only">70% Complete</span>
+              </div>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="selectedB">
+            <td>Barraks: </td>
+            <td>{{selectedB.counter}}</td>
+            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.unitId}}" [disabled]="disabler2" (click)="putbarrack(selectedB.unitId)">buy one Barrack: {{selectedB.price}}$</button></td>
+            <td style="width: 200px;">
+              <div class="progress" style="margin: auto">
+                <div class="progress-bar" role="progressbar" aria-valuenow="20"
+                     aria-valuemin="0" aria-valuemax="100" [style.width.%]="selectedB.builder/5*100">
+                  <span class="sr-only">70% Complete</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </div>
+      <div class="col-lg-5">
+        <button (click)="createPlatoon()"> create platoon</button>
+
+        <form action="/action_page.php">
+          <select #selector2 name="cars">
+            <ng-container *ngFor="let p of platoons">
+              <option value="{{p.platoonId}}">{{ p.platoonId }}</option>
+            </ng-container>
+          </select>
+          <button (click)="selectPlatoon(selector2.value)">Select</button>
+        </form>
+        <p *ngIf="platoon">Selected: {{platoon.platoonId}}</p>
+        <p *ngIf="p">{{platoon.platoonId}}</p>
+        <div *ngFor="let p of platoons" class="platoonbg">
+
+          <p *ngIf="p" style="background: black; color: yellow;">Platoon: {{ p.platoonId}}</p>
+
+
+          <!--<button (click)="refreshPlatoon()"> get platoon</button>-->
+
+          <table *ngIf="p" style="width: auto">
+            <tr *ngIf="p.a" class="asd">
+              <td>
+                <p>Archers: </p>
+              </td>
+              <td>
+                <p *ngIf="p.a">{{p.a.counter}}</p>
+              </td>
+            </tr>
+            <tr *ngIf="p.h" class="asd">
+              <td>
+                <p>Horsemans: </p>
+              </td>
+              <td>
+                <p *ngIf="p.h">{{p.h.counter}}</p>
+              </td>
+            </tr>
+            <tr *ngIf="p.s" class="asd">
+              <td>
+                <p>Footmans: </p>
+              </td>
+              <td><p *ngIf="p.s">{{p.s.counter}}</p></td>
+            </tr>
+          </table>
+          <form action="/action_page.php">
+            <select #selector1 name="cars" ng-model="slectedCountry">
+              <ng-container *ngFor="let country of countries">
+                <option *ngIf="country.countryId != selectedC.countryId" value="{{country.countryId}}">{{ country.countryName }}</option>
+              </ng-container>
+            </select>
+            <button (click)="AttackCountry(selector1.value,p.platoonId)">TÁMADÁS!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div style="border: 1px solid black;margin-top: 20px; margin-bottom: 20px;padding: 15px;">
+      <table style="width: auto">
+        <tr>
+          <td>
+            <p>unit capacity:</p>
+          </td>
+          <td>
+            <p>{{capacity()}} / {{unitnumberCounter()}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>farmers:</p>
+          </td>
+          <td>
+            <p>{{farmers()}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>potatoes per round:</p>
+          </td>
+          <td><p>{{potatoesperround()}}</p></td>
+        </tr>
+      </table>
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+  <!--<div *ngIf="selectedH">
+  <p>{{selectedH.counter}}</p>
+  <button (click)="puthorseman(selectedH.unitId)">buy one horseman</button></div>-->
+
+</div>
+
+<!--<p>asd</p>-->
+<a routerLink="/countrymanager" style="font-size: 20px;">< BACK</a>
