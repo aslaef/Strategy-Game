@@ -55,6 +55,7 @@ export class DetailsService {
   }
 
   public buyOneUnit(selectedC: ICountry, unitid: number): Observable<IUnit> {
+    console.log("asd");
     return this.http.put<IUnit>(this.url + 'api/buyOneUnit/' + unitid, selectedC)
   }
 
