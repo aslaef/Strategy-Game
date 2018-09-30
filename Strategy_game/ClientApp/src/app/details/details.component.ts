@@ -117,7 +117,6 @@ export class DetailsComponent implements OnInit {
   }
 
   public putunit(id: number) {
-    console.log("asd");
     if (this.selectedC.gold >= this.selectedA.price && this.details0 > this.unitnumber) {
       this.errormsg = null;
       this.detailsService.buyOneUnit(this.selectedC, id)
