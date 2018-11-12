@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './reducer';
 import { UsersEffects } from './effects';
+import { HttpClientModule, HttpClient  } from '@angular/common/http';
 
 export const effects = [
   UsersEffects,
@@ -19,12 +20,13 @@ export const effects = [
     HomeComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducer),
     EffectsModule.forRoot(effects),
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
