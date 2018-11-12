@@ -12,7 +12,7 @@ export class UserService {
     return this.http.get<string>(`/api/userlogin`, { params: <any>userLogin} );
   }
   register(userLogin?: UserLogin) {
-    console.log('register');
-    return this.http.get<string>(`/api/somecont/10`, { params: <any>userLogin} ).subscribe();
+    console.log(userLogin.Name);
+    return this.http.post<boolean>(`/api/register`, { params: <any>userLogin} );
   }
 }

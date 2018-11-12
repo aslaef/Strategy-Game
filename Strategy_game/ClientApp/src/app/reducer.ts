@@ -18,6 +18,7 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: UsersActions): State {
+  console.log('reducer');
   switch (action.type) {
     case UsersActionTypes.Login: {
       return {
@@ -35,6 +36,28 @@ export function reducer(state = initialState, action: UsersActions): State {
       };
     }
     case UsersActionTypes.LoginFailure: {
+      return {
+        ...state,
+        pending: false,
+        errorMessage: action.payload,
+      };
+    }
+    case UsersActionTypes.Register: {
+      return {
+        ...state,
+        pending: true,
+        errorMessage: null,
+      };
+    }
+    case UsersActionTypes.RegisterSuccess: {
+      return {
+        ...state,
+        pending: false,
+        errorMessage: null,
+
+      };
+    }
+    case UsersActionTypes.RegisterFailure: {
       return {
         ...state,
         pending: false,
