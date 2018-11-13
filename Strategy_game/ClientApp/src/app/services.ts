@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { UserDto } from './models/user-login';
 import { Injectable } from '@angular/core';
 import { UserLogin } from './models/user-dto';
 import { IPack, ICountry, IUnit, IBuilding, IPlatoon } from './models/country';
@@ -10,11 +11,12 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(userLogin?: UserLogin) {
+    return this.http.post<string>(`/api/userlogin`, userLogin );
     return this.http.post<string>(`/api/userlogin`, { params: <any>userLogin} );
   }
-  register(userLogin?: UserLogin) {
-    console.log(userLogin.Name);
-    return this.http.post<boolean>(`/api/register`, { params: <any>userLogin} );
+  register(user?: UserDto) {
+    console.log(user.Name);
+    return this.http.post<boolean>(`/api/register`, user);
   }
 
   public getAllFor(id: number){

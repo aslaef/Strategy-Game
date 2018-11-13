@@ -30,6 +30,7 @@ namespace Strategy_game
             services.AddTransient<IStrategyService, StrategyService>();
             services.AddTransient<IUnitBuildingSetterService, UnitBuildingSetterService>();
             services.AddTransient<IPlatoonService, PlatoonService>();
+            services.AddTransient<IUsersService, UsersService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //hangfire:

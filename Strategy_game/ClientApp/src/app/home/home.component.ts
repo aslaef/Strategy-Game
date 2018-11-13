@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   register(n: string, pw?: string, cname?: string) {
     console.log(n);
-    const user: UserLogin = {
+    const user: UserDto = {
       Name: n,
       CountryName: cname,
       Pass: pw,

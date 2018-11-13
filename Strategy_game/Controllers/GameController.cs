@@ -102,7 +102,7 @@ namespace Strategy_game.Controllers
             };
             var newunit = new Archer()
             {
-                OwnerCountry = c
+                OwnerCountry = c,
             };
 
             _dbcontext.Archers.Add(newunit);

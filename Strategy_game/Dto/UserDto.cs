@@ -7,10 +7,8 @@ namespace Strategy_game.Dto
 {
     public class UserDto
     {
-        public int UserId { get; set; }
-        public int Score { get; set; }
-        public virtual CountryDto OwnedCountry { get; set; }
-
-        public int Money { get; set; }
+        public string Name { get; set; }
+        public string CountryName { get; set; }
+        public string PassWord { get; set; }
     }
 }

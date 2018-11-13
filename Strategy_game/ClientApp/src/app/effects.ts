@@ -14,7 +14,7 @@ export class UsersEffects {
   @Effect()
   LogIn$ = this.actions$.pipe(
     ofType(UsersActionTypes.Login),
-    switchMap(({payload}: Login) => this.userService.login().pipe(
+    switchMap(({payload}: Login) => this.userService.login(payload).pipe(
       map(response => new LoginSuccess(response)),
       catchError(error => of(new LoginFailure(error)))
     ))
