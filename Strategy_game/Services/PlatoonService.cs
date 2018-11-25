@@ -133,27 +133,54 @@ namespace Strategy_game.Services
             _dbcontext.SaveChanges();
         }
 
-        public Platoon putArcherInPlatoon(int id, int platoonId)
+        public Platoon putUnitToPlatoon(int platoonId, int platoonUnitId)
         {
-            var c = _dbcontext.Countries.Where(A => A.CountryId == id).FirstOrDefault();
-            var a = _dbcontext.Archers.Where(A => A.OwnerCountry == c).FirstOrDefault();
-            var p = _dbcontext.Platoons
+            // a kivállasztott sereg
+            var Sereg = _dbcontext.Platoons
                 .Include(A => A.Archers)
                 .Include(A => A.Horsemans)
                 .Include(A => A.Soldiers)
+                .Include(A => A.Owner)
                 .Where(A => A.PlatoonId == platoonId).FirstOrDefault();
-            var a2 = _dbcontext.Archers.Where(A => A == p.Archers).FirstOrDefault();
-            if (a.Counter > 0)
-            {
-                a.Counter -= 1;
-                a2.Counter += 1;
 
-                _dbcontext.Entry(a).State = EntityState.Modified;
-                _dbcontext.Entry(a2).State = EntityState.Modified;
+            // a sereg országa
+            var Orszag = _dbcontext.Countries
+                .Include(Co => Co.Platoons)
+                .Where(C => C.Platoons.Select(pl => pl.Owner).Select(o => o.CountryId).Contains(Sereg.Owner.CountryId)).FirstOrDefault();
+
+            // a sereg egysége 
+            Unit UnitOfSereg = _dbcontext.Units.Where(U => U.UnitId == platoonUnitId).FirstOrDefault();
+
+            // az ország egysége
+            Unit UnitofOrszag = null;
+            if (UnitOfSereg is Archer)
+            {
+                UnitofOrszag = _dbcontext.Archers.Where(ut => ut.OwnerCountry == Orszag).FirstOrDefault();
+
+            }
+            if (UnitOfSereg is Horseman)
+            {
+                UnitofOrszag = _dbcontext.Horsemans.Where(ut => ut.OwnerCountry == Orszag).FirstOrDefault();
+
+            }
+            if (UnitOfSereg is Elite)
+            {
+                UnitofOrszag = _dbcontext.Elites.Where(ut => ut.OwnerCountry == Orszag).FirstOrDefault();
+
+            }
+            // a sereg egysége
+
+            if (UnitofOrszag.Counter > 0)
+            {
+                UnitofOrszag.Counter -= 1;
+                UnitOfSereg.Counter += 1;
+
+                _dbcontext.Entry(UnitofOrszag).State = EntityState.Modified;
+                _dbcontext.Entry(UnitOfSereg).State = EntityState.Modified;
 
                 _dbcontext.SaveChanges();
             }
-            return p;
+            return Sereg;
 
         }
 

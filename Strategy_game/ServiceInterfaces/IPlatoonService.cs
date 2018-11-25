@@ -22,7 +22,7 @@ namespace Strategy_game.ServiceInterfaces
 
         void ReturnUnitFromPlatoon(Unit u);
 
-        Platoon putArcherInPlatoon(int id,int platoonId);
+        Platoon putUnitToPlatoon(int platoonId, int platoonUnitId);
         Platoon putHorsemanInPlatoon(int id, int platoonId);
         Platoon putSoldierInPlatoon(int id, int platoonId);
 

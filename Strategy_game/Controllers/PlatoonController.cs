@@ -50,10 +50,10 @@ namespace Strategy_game.Controllers
         }
 
 
-        [HttpPut, Route("api/PutArcherInPlatoon/{id}/{platoonId}")]
-        public IActionResult PutArcherInPlatoon(int id, int platoonId)
+        [HttpPut, Route("api/PutUnitToPlatoon/{platoonId}/{platoonUnitId}")]
+        public IActionResult PutArcherInPlatoon(int platoonId, int platoonUnitId)
         {
-            var p = ps.putArcherInPlatoon(id,platoonId);
+            var p = ps.putUnitToPlatoon(platoonId, platoonUnitId);
 
             var dto = new PlatoonDto()
             {

@@ -91,5 +91,9 @@ export class DetailsService {
     return this.http.put<IPlatoon>(this.url + 'api/AttackCountry/' + id, null)
   }
 
+  public PutUnitToPlatoon(){
+    
+  }
+
 
 }

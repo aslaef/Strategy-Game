@@ -644,7 +644,7 @@ namespace XUnitTestProject1
                     var rh = context.Horsemans.Include(Ra => Ra.OwnerCountry).FirstOrDefaultAsync(C => C.OwnerCountry.CountryName == "zzzz").Result;
                     var rs = context.Elites.Include(Ra => Ra.OwnerCountry).FirstOrDefaultAsync(C => C.OwnerCountry.CountryName == "zzzz").Result;
 
-                    service.putArcherInPlatoon(from.CountryId, p.PlatoonId);
+                    service.putUnitToPlatoon(from.CountryId, p.PlatoonId);
                     service.putHorsemanInPlatoon(from.CountryId, p.PlatoonId);
                     service.putSoldierInPlatoon(from.CountryId, p.PlatoonId);
 

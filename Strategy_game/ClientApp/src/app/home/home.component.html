@@ -5,3 +5,10 @@
 <p>CountryName</p>
 <input #cname>
 <button (click)="register(name.value,pw.value,cname.value)">register</button>
+<p>Name</p>
+<input #nameLogin >
+<p>PassWord</p>
+<input #pwLogin>
+<button (click)="login(nameLogin.value,pwLogin.value)">login</button>
+
+<button routerLink="/menu">next</button>
