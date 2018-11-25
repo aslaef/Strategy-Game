@@ -37,5 +37,9 @@ export class UserService {
     return this.http.put<IPlatoon>('api/PutUnitToPlatoon/' + platoonId + '/' + unitId, null)
   }   
 
-  
+  public AttackCountry(fromId: number, toId: number){
+    var id = fromId + '/' + toId;
+    console.log(fromId);
+    return this.http.put<IPlatoon>('api/AttackCountry/' + id, null)
+  }
 }

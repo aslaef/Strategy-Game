@@ -72,8 +72,12 @@ export class DetailsComponent implements OnInit {
       );
   }
 
-  Attack(enemyId?: number){
-    if(enemyId == null){console.error("válassz ellenfelet!")}
+  public AttackCountry(platoonid: number, target?: number) {
+    //console.log(platoonid);
+    this.userService.AttackCountry(platoonid, target)
+      .subscribe(r => { this.platoon = r; this.getAll(); });
+    
+    if(target == null){console.error("válassz ellenfelet!")}
   }
 
 }
