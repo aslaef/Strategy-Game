@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { GameModule } from './game/game.module';
 import { MenuComponent } from './menu/menu.component';
 import { DetailsComponent } from './details/details.component';
+import { ScoreComponent } from './score/score.component';
 
 export const effects = [
   UsersEffects,
@@ -23,6 +24,7 @@ export const effects = [
     HomeComponent,
     MenuComponent,
     DetailsComponent,
+    ScoreComponent,
     
   ],
   imports: [

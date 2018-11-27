@@ -1,5 +1,6 @@
 export interface UserLogin {
-  Name: string;
-  Pass: string;
-  CountryName?: string;
+  name: string;
+  pass: string;
+  countryName?: string;
+  score?: string;
 }

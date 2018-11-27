@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 import { UserLogin } from './models/user-dto';
-import { UserDto } from './models/user-login';
 
 export enum UsersActionTypes {
   Login = '[Users] Load users',
@@ -27,7 +26,7 @@ export class LoginFailure implements Action {
 }
 export class Register implements Action {
   public readonly type = UsersActionTypes.Register;
-  constructor(public payload: UserDto) { }
+  constructor(public payload: UserLogin) { }
 }
 
 export class RegisterSuccess implements Action {

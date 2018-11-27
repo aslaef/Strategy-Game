@@ -1,14 +1,18 @@
+<div class="regdiv" >
 <p>Name</p>
 <input #name >
 <p>PassWord</p>
 <input #pw>
 <p>CountryName</p>
 <input #cname>
-<button (click)="register(name.value,pw.value,cname.value)">register</button>
+<button  class="regButton"  (click)="register(name.value,pw.value,cname.value)">register</button>
+</div>
+<div class="regdiv" >
 <p>Name</p>
 <input #nameLogin >
 <p>PassWord</p>
 <input #pwLogin>
-<button (click)="login(nameLogin.value,pwLogin.value)">login</button>
+<button  class="regButton"  (click)="login(nameLogin.value,pwLogin.value)">login</button>
+</div>
+<button class="regButton" routerLink="/menu">next</button>
 
-<button routerLink="/menu">next</button>

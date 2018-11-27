@@ -1,0 +1,22 @@
+<table *ngIf="users">
+  <thead>
+    <tr>
+      <th>
+        Név
+      </th>
+      <th>
+        Pontszám
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        {{user.name}}
+      </td>
+      <td>
+        {{user.score}}
+      </td>
+    </tr>
+  </tbody>
+</table>

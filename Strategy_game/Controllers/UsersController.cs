@@ -101,6 +101,33 @@ namespace Strategy_game.Controllers
             return CreatedAtAction("GetUser", new { id = 10 }, user);
         }
 
+        [HttpPost, Route("api/login")]
+        public IActionResult Login([FromBody] UserDto user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            var countryId = usersService.Login(user);
+
+            return Ok(countryId);
+        }
+
+        [HttpGet, Route("api/userscore")]
+        public IActionResult UsersScore()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userscores = usersService.usersScore();
+            return Ok(userscores);
+        }
+
+
+
         //// DELETE: api/Users/5
         //[HttpDelete("{id}")]
         //public async Task<IActionResult> DeleteUser([FromRoute] int id)

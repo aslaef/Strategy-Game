@@ -22,18 +22,18 @@ export class HomeComponent implements OnInit {
 
   register(n: string, pw?: string, cname?: string) {
     console.log(n);
-    const user: UserDto = {
-      Name: n,
-      CountryName: cname,
-      Pass: pw,
+    const user: UserLogin = {
+      name: n,
+      countryName: cname,
+      pass: pw,
     };
     this.store.dispatch(new Register(user));
   }
   login(n: string, pw?: string) {
     console.log(n);
     const user: UserLogin = {
-      Name: n,
-      Pass: pw,
+      name: n,
+      pass: pw,
     };
     this.store.dispatch(new Login(user));
   }

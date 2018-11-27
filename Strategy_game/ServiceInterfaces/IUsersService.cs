@@ -10,5 +10,8 @@ namespace Strategy_game.ServiceInterfaces
     public interface IUsersService
     {
         bool RegisterUser(UserDto u);
+        int Login(UserDto u);
+
+        List<UserDto> usersScore();
     }
 }

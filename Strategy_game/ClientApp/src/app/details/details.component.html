@@ -4,7 +4,7 @@
     background-image: url(https://pmcvariety.files.wordpress.com/2017/01/platoon.jpg?w=1000);
     background-position: center;
     background-size: cover;
-    height: 200px;
+    height: auto;
     border: 1px solid red;
   }
 
@@ -12,15 +12,17 @@
     background: black;
     color: yellow;
   }
+
+
 </style>
 
 
 <button (click)="getAll()" style="width: auto">refresh</button>
-<div class="col col-lg-12" style="border: 2px solid brown; margin-top: 20px;" *ngIf="selectedC">
+<div class="col col-lg-12 datadiv" style="border: 2px solid brown; margin-top: 20px;" *ngIf="selectedC">
   <p>Country: <b style="color: brown">{{selectedC.countryName}}</b></p>
   <p style="color: yellow; background: black">GOLD: {{selectedC.gold}}</p>
   <p style="color: sandybrown; background: black">POTATOES: {{selectedC.potatoes}}</p>
-  <table class='table' *ngIf="selectedC">
+  <table class='table' style="border: 1px solid red;" *ngIf="selectedC">
     <thead>
       <tr>
 
@@ -47,14 +49,14 @@
       <tr>
 
         <td>
-          <button (click)="upgrade(1)" style="width: auto">ADD tractor</button>
+          <button (click)="upgrade(1)" style="width: 100%">ADD tractor</button>
 
         </td>
-        <td><button (click)="upgrade(2)" style="width: auto">ADD combine</button></td>
-        <td><button (click)="upgrade(3)" style="width: auto">ADD wall</button></td>
-        <td><button (click)="upgrade(4)" style="width: auto">ADD commander</button></td>
-        <td><button (click)="upgrade(5)" style="width: auto">ADD tactican</button></td>
-        <td><button (click)="upgrade(6)" style="width: auto">ADD alchemist</button></td>
+        <td><button (click)="upgrade(2)" style="width: 100%">ADD combine</button></td>
+        <td><button (click)="upgrade(3)" style="width: 100%">ADD wall</button></td>
+        <td><button (click)="upgrade(4)" style="width: 100%">ADD commander</button></td>
+        <td><button (click)="upgrade(5)" style="width: 100%">ADD tactican</button></td>
+        <td><button (click)="upgrade(6)" style="width: 100%">ADD alchemist</button></td>
 
       </tr>
     </tbody>
@@ -64,7 +66,7 @@
     <div class="row">
       <div class="col col-lg-7">
         <p *ngIf="errormsg" style="color: red; font-size: 40px; border: 1px solid red;">{{errormsg}}</p>
-        <table style="width: 100%">
+        <table style="width: 100%; border: 1px solid red">
           <tr *ngIf="selectedA">
             <td>Archers: </td>
             <td>{{selectedA.counter}}</td>
@@ -81,16 +83,17 @@
             <td><button (click)="putunit(selectedS.unitId)">buy one footman: {{selectedS.price}}$</button></td>
           </tr>
         </table>
-        <table style="width: 100%">
+        <p style="font-size: 20px; text-decoration: underline">Buildings:</p>
+        <table style="width: 100%; border: 1px solid red;">
           <tr *ngIf="selectedF">
             <td>Farms: </td>
             <td>{{selectedF.counter}}</td>
-            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.unitId}}" [disabled]="disabler1" (click)="putbuilding(selectedF.buildingId)">buy one Farm: {{selectedF.price}}$</button></td>
+            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.buildingId}}" [disabled]="disabler1" (click)="putbuilding(selectedF.buildingId)">buy one Farm: {{selectedF.price}}$</button></td>
             <td style="width: 200px;">
               <div class="progress" style="margin: auto">
               <div class="progress-bar" role="progressbar" aria-valuenow="20"
                    aria-valuemin="0" aria-valuemax="100" [style.width.%]="selectedF.builder/5*100">
-                <span class="sr-only">70% Complete</span>
+                <span class="sr-only">{{selectedF.builder/5*100}}%</span>
               </div>
               </div>
             </td>
@@ -98,12 +101,12 @@
           <tr *ngIf="selectedB">
             <td>Barraks: </td>
             <td>{{selectedB.counter}}</td>
-            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.unitId}}" [disabled]="disabler2" (click)="putbuilding(selectedB.buildingId)">buy one Barrack: {{selectedB.price}}$</button></td>
+            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.buildingId}}" [disabled]="disabler2" (click)="putbuilding(selectedB.buildingId)">buy one Barrack: {{selectedB.price}}$</button></td>
             <td style="width: 200px;">
               <div class="progress" style="margin: auto">
                 <div class="progress-bar" role="progressbar" aria-valuenow="20"
                      aria-valuemin="0" aria-valuemax="100" [style.width.%]="selectedB.builder/5*100">
-                  <span class="sr-only">70% Complete</span>
+                  <span class="sr-only">{{selectedF.builder/5*100}}%</span>
                 </div>
               </div>
             </td>
@@ -115,9 +118,9 @@
 
 
 
-      
+
       <div class="col-lg-5">
-        <button (click)="createPlatoon()"> create platoon</button>
+        <button (click)="CreatePlatoon()"> create platoon</button>
 
         <!--<form action="/action_page.php">
           <select #selector2 name="cars">
@@ -185,25 +188,25 @@
       <table style="width: auto">
         <tr>
           <td>
-            <p>unit capacity:</p>
+            <p>unit capacity: {{selectedB.counter*200}}</p>
           </td>
           <td>
-            
+
           </td>
         </tr>
         <tr>
           <td>
-            <p>farmers:</p>
+            <p>Taxing population: {{(selectedF.counter + selectedB.counter) * 50}}</p>
           </td>
           <td>
-            
+
           </td>
         </tr>
         <tr>
           <td>
-            <p>potatoes per round:</p>
+            <p>potatoes per round:{{selectedF.counter*200}}</p>
           </td>
-          
+
         </tr>
       </table>
 

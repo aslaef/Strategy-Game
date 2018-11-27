@@ -9,6 +9,7 @@ namespace Strategy_game.Dto
     {
         public string Name { get; set; }
         public string CountryName { get; set; }
-        public string PassWord { get; set; }
+        public string Pass { get; set; }
+        public int Score { get; set; }
     }
 }

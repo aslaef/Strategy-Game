@@ -1,0 +1,28 @@
+.datadiv {
+  background: rgb(255, 255, 204);
+  border: 2px solid orange;
+  border-radius: 15px;
+  padding: 10px;
+}
+button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  width: auto;
+  background-color:orange;
+  border-radius: 15px;
+  border: 1px solid orangered;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+}
+
+td{
+  text-align: center;
+  vertical-align: center;
+}
