@@ -81,15 +81,15 @@ namespace Strategy_game.Services
                         _dbcontext.Entry(c).State = EntityState.Modified;
                         _dbcontext.Entry(farm).State = EntityState.Modified;
                         _dbcontext.Entry(barrack).State = EntityState.Modified;
+
+                        if(c.Potatoes < 0) {
+                            archer.Counter = (int)(archer.Counter * 0.8);
+                            soldier.Counter = (int)(soldier.Counter * 0.8);
+                            horse.Counter = (int)(horse.Counter * 0.8);
+                        }
+
                 }
                     
-                    
-                    
-
-
-
-
-
                 }
 
                 foreach (Country c in countries)
@@ -145,23 +145,13 @@ namespace Strategy_game.Services
                         a1.Counter = a1.Counter - (int)(a1.Counter * 0.1);
                         h1.Counter = h1.Counter - (int)(h1.Counter * 0.1);
                         s1.Counter = s1.Counter - (int)(s1.Counter * 0.1);
-
-                        _dbcontext.Entry(from).State = EntityState.Modified;
-                        _dbcontext.Entry(to).State = EntityState.Modified;
-                        _dbcontext.Entry(a1).State = EntityState.Modified;
-                        _dbcontext.Entry(h1).State = EntityState.Modified;
-                        _dbcontext.Entry(s1).State = EntityState.Modified;
-
-
+                        
                     }
                     else
                     {
                         P.Archers.Counter -= (int)(P.Archers.Counter * 0.1);
                         P.Horsemans.Counter -= (int)(P.Horsemans.Counter * 0.1);
                         P.Soldiers.Counter -= (int)(P.Soldiers.Counter * 0.1);
-
-                        _dbcontext.Entry(P).State = EntityState.Modified;
-
 
                     }
                     P.Intent = 0;

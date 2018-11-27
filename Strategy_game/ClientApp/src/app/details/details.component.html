@@ -1,7 +1,7 @@
 
 <style>
   .platoonbg {
-    background-image: url(https://pmcvariety.files.wordpress.com/2017/01/platoon.jpg?w=1000);
+    background-image: url(http://www.rhinoden.com/wp-content/uploads/2013/01/spartan3.jpg);
     background-position: center;
     background-size: cover;
     height: auto;
@@ -65,7 +65,7 @@
     <p style="font-size: 20px; text-decoration: underline">Units:</p>
     <div class="row">
       <div class="col col-lg-7">
-        <p *ngIf="errormsg" style="color: red; font-size: 40px; border: 1px solid red;">{{errormsg}}</p>
+        <!--<p *ngIf="errormsg" style="color: red; font-size: 40px; border: 1px solid red;">{{errormsg}}</p>-->
         <table style="width: 100%; border: 1px solid red">
           <tr *ngIf="selectedA">
             <td>Archers: </td>
@@ -82,13 +82,21 @@
             <td>{{selectedS.counter}}</td>
             <td><button (click)="putunit(selectedS.unitId)">buy one footman: {{selectedS.price}}$</button></td>
           </tr>
+          <tr>
+            <td>
+                Overall soldier number / capacity:
+            </td>
+            <td>
+              {{selectedA.counter + selectedS.counter + selectedH.counter}} / {{selectedB.counter*200}}
+            </td>
+          </tr>
         </table>
         <p style="font-size: 20px; text-decoration: underline">Buildings:</p>
         <table style="width: 100%; border: 1px solid red;">
           <tr *ngIf="selectedF">
             <td>Farms: </td>
             <td>{{selectedF.counter}}</td>
-            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.buildingId}}" [disabled]="disabler1" (click)="putbuilding(selectedF.buildingId)">buy one Farm: {{selectedF.price}}$</button></td>
+            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.buildingId}}" [disabled]="" (click)="putbuilding(selectedF.buildingId)">buy one Farm: {{selectedF.price}}$</button></td>
             <td style="width: 200px;">
               <div class="progress" style="margin: auto">
               <div class="progress-bar" role="progressbar" aria-valuenow="20"
@@ -101,7 +109,7 @@
           <tr *ngIf="selectedB">
             <td>Barraks: </td>
             <td>{{selectedB.counter}}</td>
-            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.buildingId}}" [disabled]="disabler2" (click)="putbuilding(selectedB.buildingId)">buy one Barrack: {{selectedB.price}}$</button></td>
+            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.buildingId}}" [disabled]="" (click)="putbuilding(selectedB.buildingId)">buy one Barrack: {{selectedB.price}}$</button></td>
             <td style="width: 200px;">
               <div class="progress" style="margin: auto">
                 <div class="progress-bar" role="progressbar" aria-valuenow="20"
@@ -134,8 +142,6 @@
 
 
         <p *ngIf="platoon">Selected: {{platoon.platoonId}}</p>
-        <p *ngIf="p">{{platoon.platoonId}}</p>
-
         <div *ngFor="let p of platoons" class="platoonbg">
 
           <p *ngIf="p" style="background: black; color: yellow;">Platoon: {{ p.platoonId}}</p>
@@ -214,18 +220,8 @@
 
 
     </div>
+    <button routerLink="/menu">Back</button>
 
 
 
   </div>
-
-
-  <!--<div *ngIf="selectedH">
-  <p>{{selectedH.counter}}</p>
-  <button (click)="puthorseman(selectedH.unitId)">buy one horseman</button></div>
-
-</div>
-
-<!--<p>asd</p>
-<a routerLink="/countrymanager" style="font-size: 20px;">< BACK</a>
--->

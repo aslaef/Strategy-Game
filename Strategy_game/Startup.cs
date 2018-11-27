@@ -66,7 +66,6 @@ namespace Strategy_game
             app.UseHangfireServer();
             app.UseHangfireDashboard();
 
-            //hangfire-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

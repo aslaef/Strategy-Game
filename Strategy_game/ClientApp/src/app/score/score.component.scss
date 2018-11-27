@@ -1,0 +1,36 @@
+.scoretable {
+  align-content: center;
+  align-self: center;
+  margin: auto;
+  margin-top: 50px;
+  width: 80%;
+  table-layout: fixed;
+}
+th {
+  border-bottom: 1px solid black;
+}
+.nameColumn {
+  border-right: 1px solid black;
+  font-weight: 800;
+}
+.scorediv {
+  margin: auto;
+  width: 200px;
+  border:1px solid black;
+  background: rgb(255, 255, 204);
+  border-radius: 15px;
+  padding-bottom: 50px;
+}
+table{
+
+}
+.regButton {
+  margin: auto;
+  margin-top: 20px;
+  width: auto;
+  background-color:orange;
+  border-radius: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+}

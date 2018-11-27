@@ -211,31 +211,59 @@ namespace Strategy_game.Controllers
         public async Task<IActionResult> putUpgrade([FromRoute] int id, [FromRoute] int id2)
         {
             var C = _dbcontext.Countries.Where(c => c.CountryId == id).FirstOrDefault();
+            int countedUpradges = 0;
+            if (C.Tractor == true)
+            {
+                countedUpradges++;
+            }
+            if (C.Combine == true)
+            {
+                countedUpradges++;
+            }
+            if (C.Wall == true)
+            {
+                countedUpradges++;
+            }
+            if (C.Commander == true)
+            {
+                countedUpradges++;
+            }
+            if (C.Tactican == true)
+            {
+                countedUpradges++;
+            }
+            if (C.Alchemy == true)
+            {
+                countedUpradges++;
+            }
 
-            if (id2 == 1)
-            {
-                C.Tractor = true;
+            if(countedUpradges < 4) { 
+                if (id2 == 1)
+                {
+                    C.Tractor = true;
+                }
+                if (id2 == 2)
+                {
+                    C.Combine = true;
+                }
+                if (id2 == 3)
+                {
+                    C.Wall = true;
+                }
+                if (id2 == 4)
+                {
+                    C.Commander = true;
+                }
+                if (id2 == 5)
+                {
+                    C.Tactican = true;
+                }
+                if (id2 == 6)
+                {
+                    C.Alchemy = true;
+                }
             }
-            if (id2 == 2)
-            {
-                C.Combine = true;
-            }
-            if (id2 == 3)
-            {
-                C.Wall = true;
-            }
-            if (id2 == 4)
-            {
-                C.Commander = true;
-            }
-            if (id2 == 5)
-            {
-                C.Tactican = true;
-            }
-            if (id2 == 6)
-            {
-                C.Alchemy = true;
-            }
+
             _dbcontext.Entry(C).State = EntityState.Modified;
             await _dbcontext.SaveChangesAsync();
             return Ok(C);
