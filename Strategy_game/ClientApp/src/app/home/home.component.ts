@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { State } from '../reducer';
 import { Register, Login } from '../actions';
 import { UserLogin } from '../models/user-dto';
+import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
 
@@ -35,7 +39,14 @@ export class HomeComponent implements OnInit {
       name: n,
       pass: pw,
     };
-    this.store.dispatch(new Login(user));
+    this.userService.login(user).pipe(first())
+    .subscribe(
+        data => {
+            this.router.navigate(['menu']);
+        },
+        error => {
+            console.log(error);
+        });
   }
 
 }

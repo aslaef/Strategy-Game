@@ -1,11 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Strategy_game.Context;
 using Strategy_game.Dto;
+using Strategy_game.Helpers;
 using Strategy_game.Models;
 using Strategy_game.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Strategy_game.Services
@@ -13,18 +19,44 @@ namespace Strategy_game.Services
     public class UsersService : IUsersService
     {
         private ApplitactionDbContext _dbcontext;
+        private readonly AppSettings _appSettings;
 
-        public UsersService(ApplitactionDbContext context)
+        public UsersService(ApplitactionDbContext context, IOptions<AppSettings> appSettings)
         {
+            _appSettings = appSettings.Value;
+
             _dbcontext = context;
         }
 
-        public int Login(UserDto u)
+        public User Login(UserDto u)
         {
             
-            var userCountry = _dbcontext.Users.Include(user => user.OwnedCountry).Where(user => user.Name == u.Name && u.Pass == u.Pass).FirstOrDefault();
-            var returned = userCountry.OwnedCountry.CountryId;
-            return returned;
+            var user = _dbcontext.Users.Include(U => U.OwnedCountry).Where(U => U.Name == u.Name && u.Pass == u.Pass).FirstOrDefault();
+            var returned = user.OwnedCountry.CountryId;
+
+            if (user == null)
+                return null;
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.UserId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
+
+            // remove password before returning
+            user.Password = null;
+
+            return user;
+
+
         }
 
         public bool RegisterUser(UserDto u)

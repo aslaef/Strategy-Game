@@ -25,7 +25,7 @@ export const effects = [
     MenuComponent,
     DetailsComponent,
     ScoreComponent,
-    
+
   ],
   imports: [
     HttpClientModule,

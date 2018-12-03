@@ -79,7 +79,7 @@ export class DetailsComponent implements OnInit {
   AttackCountry(platoonid: number, target?: number) {
     // console.log(platoonid);
     this.userService.AttackCountry(platoonid, target)
-      .subscribe(r => { this.platoon = r; this.getAll(); });
+      .subscribe(r => {this.getAll(); });
 
     if (target == null) {console.error('válassz ellenfelet!'); }
   }

@@ -166,6 +166,8 @@ namespace Strategy_game.Migrations
 
                     b.Property<int>("Score");
 
+                    b.Property<string>("Token");
+
                     b.HasKey("UserId");
 
                     b.HasIndex("OwnedCountryCountryId");

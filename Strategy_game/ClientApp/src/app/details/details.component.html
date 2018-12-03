@@ -148,13 +148,13 @@
 
 
           <!--<button (click)="refreshPlatoon()"> get platoon</button>-->
-          <form action="/action_page.php">
+          <form>
             <select #selector1 name="cars" ng-model="slectedCountry">
               <ng-container *ngFor="let country of countries">
                 <option *ngIf="country.countryId != selectedC.countryId" value="{{country.countryId}}">{{ country.countryName }}</option>
               </ng-container>
             </select>
-            <button (click)="AttackCountry(selector1.value,p.platoonId)">TÁMADÁS!</button>
+            <button (click)="AttackCountry(p.platoonId, selector1.value)">TÁMADÁS!</button>
           </form>
           <table *ngIf="p" style="width: auto">
             <tr *ngIf="p.a" class="asd">

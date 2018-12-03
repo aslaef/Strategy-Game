@@ -37,8 +37,8 @@ namespace Strategy_game.Controllers
             {
                 return NotFound();
             }
-            CountryDto newcountry = new CountryDto(tempCountry);
-            return Ok(newcountry);
+            CountryDto CountryDto = new CountryDto(tempCountry);
+            return Ok(CountryDto);
         }
 
 

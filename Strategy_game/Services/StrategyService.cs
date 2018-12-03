@@ -124,8 +124,13 @@ namespace Strategy_game.Services
                     var h1 = _dbcontext.Horsemans.Where(c => c.OwnerCountry == to).FirstOrDefault();
                     var s1 = _dbcontext.Elites.Where(c => c.OwnerCountry == to).FirstOrDefault();
 
+                    if (a1 == null)
+                    {
+                        P.Intent = 0;
+                        _dbcontext.SaveChanges();
+                        return PList;
+                    }
 
-            
 
                     var enemysoldiercount = a1.Def*a1.Counter + a1.Def*h1.Counter + s1.Def*s1.Counter;
                     var friendlysoldiercount = P.Archers.Atk * P.Archers.Counter + P.Horsemans.Atk * P.Horsemans.Counter + P.Soldiers.Atk* P.Soldiers.Counter;
