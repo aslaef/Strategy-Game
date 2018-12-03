@@ -4,21 +4,17 @@ import { UsersActions, UsersActionTypes } from './actions';
 export interface State {
   pending: boolean;
   errorMessage: string;
-  PageCount: number;
-  PageNumber: number;
-  Count: number;
+  CountryId: number;
 }
 
 export const initialState: State = {
   pending: false,
   errorMessage: null,
-  PageCount: 0,
-  PageNumber: 1,
-  Count: 0,
+  CountryId: null,
 };
 
 export function reducer(state = initialState, action: UsersActions): State {
-  console.log('reducer');
+  console.log(action);
   switch (action.type) {
     case UsersActionTypes.Login: {
       return {
@@ -32,7 +28,7 @@ export function reducer(state = initialState, action: UsersActions): State {
         ...state,
         pending: false,
         errorMessage: null,
-
+        CountryId: action.payload,
       };
     }
     case UsersActionTypes.LoginFailure: {

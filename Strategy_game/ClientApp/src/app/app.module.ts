@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducer } from './reducer';
+import { reducer as UserReducer} from './reducer';
 import { UsersEffects } from './effects';
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +13,12 @@ import { GameModule } from './game/game.module';
 import { MenuComponent } from './menu/menu.component';
 import { DetailsComponent } from './details/details.component';
 import { ScoreComponent } from './score/score.component';
+import { reducer as CountryReducer } from './country-reducer';
+
+export const reducers = {
+  user: UserReducer,
+  country: CountryReducer,
+}; 
 
 export const effects = [
   UsersEffects,
@@ -32,7 +38,7 @@ export const effects = [
     BrowserModule,
     AppRoutingModule,
     GameModule,
-    StoreModule.forRoot(reducer),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot(effects),
   ],
   providers: [HttpClientModule],

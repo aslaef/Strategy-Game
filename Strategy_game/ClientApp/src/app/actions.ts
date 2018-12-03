@@ -17,7 +17,7 @@ export class Login implements Action {
 
 export class LoginSuccess implements Action {
   public readonly type = UsersActionTypes.LoginSuccess;
-  constructor(public payload?: string) { }
+  constructor(public payload?: number) { }
 }
 
 export class LoginFailure implements Action {

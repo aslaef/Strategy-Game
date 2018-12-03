@@ -29,15 +29,11 @@ namespace Strategy_game.Services
 
         public bool RegisterUser(UserDto u)
         {
-            var games = _dbcontext.Games;
-            if(games == null)
+            var games = _dbcontext.Games.ToList();
+            if(games.Count < 1)
             {
                 _dbcontext.Games.Add(new Game {RoundNumber = 1 });
             }
-
-
-
-
 
             var c = new Country()
             {

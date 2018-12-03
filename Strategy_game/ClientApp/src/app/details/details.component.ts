@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from '../reducer';
+import { Store, select } from '@ngrx/store';
+import { State as UserState } from '../reducer';
 import { UserService } from '../services';
-import { ICountry, IUnit, IBuilding, IPlatoon } from '../models/country';
+import { ICountry, IUnit, IBuilding, IPlatoon, IPack } from '../models/country';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { GetCountry } from '../country-actions';
+import { State as CountryState} from '../country-reducer';
+
+export interface State {
+  userState: UserState,
+  countryState: CountryState,
+} 
 
 @Component({
   selector: 'app-details',
@@ -20,18 +29,33 @@ export class DetailsComponent implements OnInit {
   public platoon: IPlatoon;
   public platoons: IPlatoon[];
 
-  public unitCapacity: number;
+  public Pack: Observable<IPack>;
 
-  public countryId = 1004;
+  public unitCapacity: number;
+  public cId: Observable<number>;
+  public countryId = 2;
   constructor(private store: Store<State>,
     private userService: UserService) { }
 
   ngOnInit() {
-    this.getAll();
-  }
+    this.cId = this.store.pipe(
+      filter(s => s != null),
+      filter(s => s.userState != null),
+      select(s => s.userState.CountryId),
+    );
+    // this.getAll();
+    
+    this.cId.subscribe(id =>{
+      this.store.dispatch(new GetCountry(id));
+    } );
 
-  getAll() {
-    this.userService.getAllFor(this.countryId).subscribe(result => {
+    this.Pack = this.store.pipe(
+      filter(s => s.countryState != null),
+      filter(s => s.countryState.countryPack != null),
+      select(s => s.countryState.countryPack),
+    );
+
+    this.Pack.subscribe(result => {
       this.selectedC = result.c;
       this.selectedA = result.a;
       this.selectedH = result.h;
@@ -40,6 +64,22 @@ export class DetailsComponent implements OnInit {
       this.selectedB = result.b;
       this.platoons = result.p;
       this.countries = result.cs;
+    });
+
+  }
+
+  getAll() {
+
+
+    this.userService.getAllFor(this.countryId).subscribe(result => {
+     // this.selectedC = result.c;
+     // this.selectedA = result.a;
+     // this.selectedH = result.h;
+     // this.selectedS = result.s;
+     // this.selectedF = result.f;
+     // this.selectedB = result.b;
+     // this.platoons = result.p;
+     // this.countries = result.cs;
     }, error => console.error(error));
   }
 

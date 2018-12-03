@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UsersActionTypes, Login, LoginSuccess, LoginFailure, Register, RegisterSuccess, RegisterFailure } from './actions';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { CountryActionTypes, GetCountry, GetCountrySuccess, GetCountryFailure } from './country-actions';
 
 
 @Injectable()
@@ -26,6 +27,15 @@ export class UsersEffects {
     switchMap(({payload}: Register) => this.userService.register(payload).pipe(
       map(response => new RegisterSuccess()),
       catchError(error => of(new RegisterFailure(error)))
+    ))
+  );
+
+  @Effect()
+  CountryPack$ = this.actions$.pipe(
+    ofType(CountryActionTypes.GetCountry),
+    switchMap(({payload}: GetCountry) => this.userService.getAllFor(payload).pipe(
+      map(response => new GetCountrySuccess(response)),
+      catchError(error => of(new GetCountryFailure(error)))
     ))
   );
 }

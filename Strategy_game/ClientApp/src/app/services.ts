@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(userLogin?: UserLogin) {
-    return this.http.post<string>('/api/login', userLogin );
+    return this.http.post<number>('/api/login', userLogin );
     // return this.http.post<string>(`/api/userlogin`, { params: <any>userLogin} );
   }
   register(user?: UserLogin) {
