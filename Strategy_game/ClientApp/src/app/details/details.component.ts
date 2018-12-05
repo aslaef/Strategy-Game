@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
 
   public unitCapacity: number;
 
-  public countryId = 1004;
+  public countryId = 1;
   constructor(private store: Store<State>,
     private userService: UserService) { }
 
