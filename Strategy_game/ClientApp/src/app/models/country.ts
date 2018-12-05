@@ -3,8 +3,8 @@ export interface IGame {
     gameId: number;
     roundNumber: number;
   }
-  
-  
+
+
   export interface ICountry {
     countryId?: number;
     tractor: boolean;
@@ -17,7 +17,7 @@ export interface IGame {
     gold: number;
     potatoes: number;
   }
-  
+
   export class Country implements ICountry {
     countryId: number;
     tractor: boolean;
@@ -31,9 +31,8 @@ export interface IGame {
     potatoes: number;
     constructor(CountryName: string) { this.countryName = CountryName; }
   }
-  
-  
-  export interface IBuilding{
+
+  export interface IBuilding {
     counter: number;
     buildingId: number;
     capacity?: number;
@@ -42,8 +41,7 @@ export interface IGame {
     price: number;
     builder: number;
   }
-  
-  
+
   export interface IUnit {
     unitId: number;
     defenderPosition: boolean;
@@ -55,7 +53,7 @@ export interface IGame {
     counter: number;
     ownerCountry: Country;
   }
-  
+
   export interface IPack {
     c: ICountry;
     a: IUnit;
@@ -66,8 +64,8 @@ export interface IGame {
     p: IPlatoon[];
     cs: ICountry[];
   }
-  
-  
+
+
   export interface IPlatoon {
     platoonId: number;
     c: ICountry;
@@ -75,4 +73,3 @@ export interface IGame {
     h: IUnit;
     s: IUnit;
   }
-  

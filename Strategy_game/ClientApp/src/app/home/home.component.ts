@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  id: number;
   constructor(
     private store: Store<State>,
     private userService: UserService,
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     this.userService.login(user).pipe(first())
     .subscribe(
         data => {
-            this.router.navigate(['menu']);
+            this.router.navigate(['menu/' + data.countryId]);
         },
         error => {
             console.log(error);

@@ -3,4 +3,5 @@ export interface UserLogin {
   pass: string;
   countryName?: string;
   score?: string;
+  countryId?: number;
 }

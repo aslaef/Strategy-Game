@@ -61,7 +61,7 @@ namespace Strategy_game.Services
 
         public bool RegisterUser(UserDto u)
         {
-            var games = _dbcontext.Games;
+            var games = _dbcontext.Games.FirstOrDefault();
             if(games == null)
             {
                 _dbcontext.Games.Add(new Game {RoundNumber = 1 });

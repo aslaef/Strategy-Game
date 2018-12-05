@@ -8,8 +8,8 @@ import { AuthGuard } from './_guards';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
-  {path: 'details', component: DetailsComponent },
+  {path: 'menu/:countryId', component: MenuComponent, canActivate: [AuthGuard]  },
+  {path: 'details/:countryId', component: DetailsComponent },
   {path: 'score', component: ScoreComponent },
 ];
 

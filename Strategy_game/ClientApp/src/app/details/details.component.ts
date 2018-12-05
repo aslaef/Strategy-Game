@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../reducer';
 import { UserService } from '../services';
 import { ICountry, IUnit, IBuilding, IPlatoon } from '../models/country';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -19,19 +20,22 @@ export class DetailsComponent implements OnInit {
   public selectedB: IBuilding;
   public platoon: IPlatoon;
   public platoons: IPlatoon[];
-
+  targetid;
   public unitCapacity: number;
 
   public countryId = 1;
   constructor(private store: Store<State>,
-    private userService: UserService) { }
+    private userService: UserService, private route: ActivatedRoute,
+    ) { }
 
   ngOnInit() {
-    this.getAll();
+    this.targetid = this.route.snapshot.paramMap.get('countryId');
+
+    this.getAll(this.targetid);
   }
 
-  getAll() {
-    this.userService.getAllFor(this.countryId).subscribe(result => {
+  getAll(id: number) {
+    this.userService.getAllFor(id).subscribe(result => {
       this.selectedC = result.c;
       this.selectedA = result.a;
       this.selectedH = result.h;
@@ -43,16 +47,25 @@ export class DetailsComponent implements OnInit {
     }, error => console.error(error));
   }
 
-
+  countTrue() {
+    let counter = 0;
+    if (this.selectedC.alchemy === true) { counter += 1; }
+    if (this.selectedC.combine === true) { counter += 1; }
+    if (this.selectedC.commander === true) { counter += 1; }
+    if (this.selectedC.tactican === true) { counter += 1; }
+    if (this.selectedC.wall === true) { counter += 1; }
+    if (this.selectedC.tractor === true) { counter += 1; }
+    return counter;
+  }
 
   upgrade(n: number) {
-    this.userService.upgrade(this.countryId, n).subscribe(r => this.getAll());
+    this.userService.upgrade(this.targetid, n).subscribe(r => this.getAll(this.targetid));
   }
 
   putunit(id: number) {
     this.userService.putUnit(this.selectedC, id)
     .subscribe(result => {
-      this.getAll();
+      this.getAll(this.targetid);
     }, error => console.error(error));
   }
 
@@ -60,26 +73,26 @@ export class DetailsComponent implements OnInit {
     console.log(id);
     this.userService.putbuilding(this.selectedC, id)
     .subscribe(result => {
-      this.getAll();
+      this.getAll(this.targetid);
     }, error => console.error(error));
   }
 
   PutUnitToPlatoon(platoonId: number, selectedPlatoonUnit) {
     this.userService.putUnitToPlatoon(platoonId, selectedPlatoonUnit)
     .subscribe(result =>
-        this.getAll()
+        this.getAll(this.targetid)
       );
   }
 
   CreatePlatoon(countryId: number) {
 
-    this.userService.CreatePlatoon(this.selectedC.countryId).subscribe(r => this.getAll());
+    this.userService.CreatePlatoon(this.selectedC.countryId).subscribe(r => this.getAll(this.targetid));
   }
 
   AttackCountry(platoonid: number, target?: number) {
     // console.log(platoonid);
     this.userService.AttackCountry(platoonid, target)
-      .subscribe(r => {this.getAll(); });
+      .subscribe(r => {this.getAll(this.targetid); });
 
     if (target == null) {console.error('válassz ellenfelet!'); }
   }

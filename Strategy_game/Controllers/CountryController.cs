@@ -237,7 +237,7 @@ namespace Strategy_game.Controllers
                 countedUpradges++;
             }
 
-            if(countedUpradges < 4) { 
+            if(countedUpradges < 3) { 
                 if (id2 == 1)
                 {
                     C.Tractor = true;

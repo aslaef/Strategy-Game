@@ -17,7 +17,7 @@
 </style>
 
 
-<button (click)="getAll()" style="width: auto">refresh</button>
+<button (click)="getAll(targetid)" style="width: auto">refresh</button>
 <div class="col col-lg-12 datadiv" style="border: 2px solid brown; margin-top: 20px;" *ngIf="selectedC">
   <p>Country: <b style="color: brown">{{selectedC.countryName}}</b></p>
   <p style="color: yellow; background: black">GOLD: {{selectedC.gold}}</p>
@@ -61,6 +61,7 @@
       </tr>
     </tbody>
   </table>
+  {{countTrue()}} / 3
   <div>
     <p style="font-size: 20px; text-decoration: underline">Units:</p>
     <div class="row">
@@ -96,12 +97,12 @@
           <tr *ngIf="selectedF">
             <td>Farms: </td>
             <td>{{selectedF.counter}}</td>
-            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.buildingId}}" [disabled]="" (click)="putbuilding(selectedF.buildingId)">buy one Farm: {{selectedF.price}}$</button></td>
+            <td *ngIf="selectedF.builder == 0"><button id="{{selectedF.buildingId}}" (click)="putbuilding(selectedF.buildingId)">buy one Farm: {{selectedF.price}}$</button></td>
             <td style="width: 200px;">
               <div class="progress" style="margin: auto">
               <div class="progress-bar" role="progressbar" aria-valuenow="20"
                    aria-valuemin="0" aria-valuemax="100" [style.width.%]="selectedF.builder/5*100">
-                <span class="sr-only">{{selectedF.builder/5*100}}%</span>
+                <span class="sr-only">{{100 - (selectedF.builder/5*100)}}%</span>
               </div>
               </div>
             </td>
@@ -109,12 +110,12 @@
           <tr *ngIf="selectedB">
             <td>Barraks: </td>
             <td>{{selectedB.counter}}</td>
-            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.buildingId}}" [disabled]="" (click)="putbuilding(selectedB.buildingId)">buy one Barrack: {{selectedB.price}}$</button></td>
+            <td *ngIf="selectedB.builder == 0"><button id="{{selectedB.buildingId}}" (click)="putbuilding(selectedB.buildingId)">buy one Barrack: {{selectedB.price}}$</button></td>
             <td style="width: 200px;">
               <div class="progress" style="margin: auto">
                 <div class="progress-bar" role="progressbar" aria-valuenow="20"
                      aria-valuemin="0" aria-valuemax="100" [style.width.%]="selectedB.builder/5*100">
-                  <span class="sr-only">{{selectedF.builder/5*100}}%</span>
+                  <span class="sr-only">{{100 - (selectedB.builder/5*100)}}%</span>
                 </div>
               </div>
             </td>
@@ -148,14 +149,14 @@
 
 
           <!--<button (click)="refreshPlatoon()"> get platoon</button>-->
-          <form>
+
             <select #selector1 name="cars" ng-model="slectedCountry">
               <ng-container *ngFor="let country of countries">
                 <option *ngIf="country.countryId != selectedC.countryId" value="{{country.countryId}}">{{ country.countryName }}</option>
               </ng-container>
             </select>
-            <button (click)="AttackCountry(p.platoonId, selector1.value)">TÁMADÁS!</button>
-          </form>
+            <button (click)="AttackCountry(p.platoonId, selector1.value)">ATTACK!</button>
+
           <table *ngIf="p" style="width: auto">
             <tr *ngIf="p.a" class="asd">
               <td>

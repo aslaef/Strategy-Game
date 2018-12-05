@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  constructor() { }
+  targetid;
+  constructor(    private route: ActivatedRoute,
+    ) {
+    this.targetid = this.route.snapshot.paramMap.get('countryId');
+
+   }
 
   ngOnInit() {
   }

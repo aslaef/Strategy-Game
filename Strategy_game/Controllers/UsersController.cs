@@ -73,8 +73,8 @@ namespace Strategy_game.Controllers
 
 
             var countryId = usersService.Login(user);
-
-            return Ok(countryId);
+            var userDto = new UserDto(countryId);
+            return Ok(userDto);
         }
         [AllowAnonymous]
         [HttpGet, Route("api/userscore")]
