@@ -8,6 +8,9 @@ export enum UsersActionTypes {
   Register = '[Users] Register users',
   RegisterSuccess = '[Users] Register users success',
   RegisterFailure = '[Users] Register users failure',
+  GetScore = '[Users] GetScore users',
+  GetScoreSuccess = '[Users] GetScore users success',
+  GetScoreFailure = '[Users] GetScore users failure',
 }
 
 export class Login implements Action {
@@ -33,12 +36,31 @@ export class RegisterSuccess implements Action {
   public readonly type = UsersActionTypes.RegisterSuccess;
   constructor() { }
 }
-
 export class RegisterFailure implements Action {
   public readonly type = UsersActionTypes.RegisterFailure;
   constructor(public payload?: string) { }
 }
+
+export class GetScore implements Action {
+  public readonly type = UsersActionTypes.GetScore;
+  constructor() { }
+}
+
+export class GetScoreSuccess implements Action {
+  public readonly type = UsersActionTypes.GetScoreSuccess;
+  constructor(public payload?: UserLogin[]) { }
+}
+export class GetScoreFailure implements Action {
+  public readonly type = UsersActionTypes.GetScoreFailure;
+  constructor(public payload?: string) { }
+}
+
+
+
 export type UsersActions =
+  GetScore |
+  GetScoreSuccess |
+  GetScoreFailure |
   Login |
   LoginSuccess |
   LoginFailure |

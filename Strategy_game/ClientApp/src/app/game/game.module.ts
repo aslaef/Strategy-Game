@@ -6,7 +6,6 @@ import { MenuComponent } from './menu/menu.component';
   declarations: [],
   imports: [
     CommonModule,
-    
   ]
 })
 export class GameModule { }

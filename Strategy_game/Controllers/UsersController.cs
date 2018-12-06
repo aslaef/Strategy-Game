@@ -76,7 +76,6 @@ namespace Strategy_game.Controllers
             var userDto = new UserDto(countryId);
             return Ok(userDto);
         }
-        [AllowAnonymous]
         [HttpGet, Route("api/userscore")]
         public IActionResult UsersScore()
         {

@@ -95,6 +95,7 @@ namespace Strategy_game
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -117,9 +118,6 @@ namespace Strategy_game
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            app.UseAuthentication();
-
         }
     }
 }

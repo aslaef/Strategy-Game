@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Strategy_game.Context;
 using Strategy_game.Dto;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace Strategy_game.Controllers
 {
 
-
+    [Authorize]
     public class CountryController : Controller
     {
         public readonly ApplitactionDbContext _dbcontext;

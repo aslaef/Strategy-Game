@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'menu/:countryId', component: MenuComponent, canActivate: [AuthGuard]  },
   {path: 'details/:countryId', component: DetailsComponent },
-  {path: 'score', component: ScoreComponent },
+  {path: 'score/:countryId', component: ScoreComponent },
 ];
 
 @NgModule({

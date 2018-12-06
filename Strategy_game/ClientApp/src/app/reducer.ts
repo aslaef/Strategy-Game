@@ -1,4 +1,5 @@
 import { UsersActions, UsersActionTypes } from './actions';
+import { UserLogin } from './models/user-dto';
 
 
 export interface State {
@@ -7,6 +8,7 @@ export interface State {
   PageCount: number;
   PageNumber: number;
   Count: number;
+  scores: UserLogin[];
 }
 
 export const initialState: State = {
@@ -15,6 +17,7 @@ export const initialState: State = {
   PageCount: 0,
   PageNumber: 1,
   Count: 0,
+  scores: [],
 };
 
 export function reducer(state = initialState, action: UsersActions): State {
@@ -58,6 +61,28 @@ export function reducer(state = initialState, action: UsersActions): State {
       };
     }
     case UsersActionTypes.RegisterFailure: {
+      return {
+        ...state,
+        pending: false,
+        errorMessage: action.payload,
+      };
+    }
+    case UsersActionTypes.GetScore: {
+      return {
+        ...state,
+        pending: true,
+        errorMessage: null,
+      };
+    }
+    case UsersActionTypes.GetScoreSuccess: {
+      return {
+        ...state,
+        pending: false,
+        errorMessage: null,
+        scores: action.payload,
+      };
+    }
+    case UsersActionTypes.GetScoreFailure: {
       return {
         ...state,
         pending: false,

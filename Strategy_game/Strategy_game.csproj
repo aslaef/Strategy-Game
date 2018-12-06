@@ -56,6 +56,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\counter\NewFolder\" />
+    <Folder Include="ClientApp\src\app\_helper\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
