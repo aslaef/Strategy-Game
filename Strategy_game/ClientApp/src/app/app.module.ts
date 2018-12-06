@@ -14,6 +14,7 @@ import { MenuComponent } from './menu/menu.component';
 import { DetailsComponent } from './details/details.component';
 import { ScoreComponent } from './score/score.component';
 import { JwtInterceptor } from './_helper/JwtInterceptor.1';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export const effects = [
   UsersEffects,
@@ -35,6 +36,9 @@ export const effects = [
     GameModule,
     StoreModule.forRoot(reducer),
     EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    })
   ],
   providers: [
     HttpClientModule,

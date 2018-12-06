@@ -30,7 +30,7 @@ export class ScoreComponent implements OnInit {
     this.store.dispatch(new GetScore());
 
     this.users$ = this.store.pipe(
-      filter(s => s != null),
+      // filter(s => s != null),
       select(s => s.scores),
     );
 
